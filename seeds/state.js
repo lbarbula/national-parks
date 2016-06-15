@@ -48,7 +48,17 @@ exports.seed = function(knex, Promise) {
           }
           return Promise.all([
         // Inserts seed entries
-              knex('park').insert({name: 'Yellowstone', year_founded: '1872', state_id:getStateId('Wyoming'), size:'2219790', img:'http://cdn.yellowstoneparknet.com/images/home/summer.jpg'}),
+              knex('park').insert(
+                {
+                  name: 'Yellowstone', year_founded: '1872', state_id:getStateId('Wyoming'), size:'2219790', img:'http://cdn.yellowstoneparknet.com/images/home/summer.jpg'
+              },
+              {
+                name: 'Sequoia', year_founded: '1890', state_id:getStateId('California'), size:'404051', img:'https://upload.wikimedia.org/wikipedia/commons/2/27/Giant_Forest.jpg'
+              },
+              {
+                name: 'Yosemite', year_founded: '1890', state_id:getStateId('California'), size:'761266', img:'https://upload.wikimedia.org/wikipedia/commons/c/c7/YosemitePark2_amk.jpg'
+              },
+              ),
             ]);
       });
     })
