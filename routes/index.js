@@ -4,7 +4,9 @@ var knex = require('../db/knex')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  knex('park').select().then(function(parks){
+    res.render('index', { list:parks });
+  })
 });
 
 module.exports = router;

@@ -1,2 +1,10 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>National Parks</h1>
+
+<ul>
+  {{#each list}}
+  <li>
+    {{this.name}}
+    <img class="" src={{this.img}}>
+  </li>
+  {{/each}}
+</ul>
