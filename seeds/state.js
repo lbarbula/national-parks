@@ -2,8 +2,13 @@
 exports.seed = function(knex, Promise) {
 
     // Deletes ALL existing entries
-    return knex('state').del()
+    return knex('park').del()
     .then(function(){
+
+    return knex('state').del()
+  })
+    .then(function(){
+
     // Inserts seed entries
     return Promise.all([
       knex('state').insert({name: 'Alaska'}),
@@ -34,8 +39,7 @@ exports.seed = function(knex, Promise) {
       knex('state').insert({name: 'Wyoming'}),
       knex('state').insert({name: 'Idaho'})
       ])
-    }).then(function(){
-      return knex('park').del()
+    })
       .then(function(){
         return knex('state').select().then(function(states){
       // Inserts seed entries
@@ -51,16 +55,14 @@ exports.seed = function(knex, Promise) {
               knex('park').insert(
                 {
                   name: 'Yellowstone', year_founded: '1872', state_id:getStateId('Wyoming'), size:'2219790', img:'http://cdn.yellowstoneparknet.com/images/home/summer.jpg'
-              },
-              {
-                name: 'Sequoia', year_founded: '1890', state_id:getStateId('California'), size:'404051', img:'https://upload.wikimedia.org/wikipedia/commons/2/27/Giant_Forest.jpg'
-              },
-              {
-                name: 'Yosemite', year_founded: '1890', state_id:getStateId('California'), size:'761266', img:'https://upload.wikimedia.org/wikipedia/commons/c/c7/YosemitePark2_amk.jpg'
-              },
-              ),
-            ]);
+                }),
+                knex('park').insert({
+                  name: 'Yosemite', year_founded: '1880', state_id:getStateId('California'), size:'761266', img:'https://upload.wikimedia.org/wikipedia/commons/c/c7/YosemitePark2_amk.jpg'
+                }),
+                knex('park').insert({
+                  name: 'Sequoia', year_founded: '1880', state_id:getStateId('California'), size:'404051', img:'https://upload.wikimedia.org/wikipedia/commons/2/27/Giant_Forest.jpg'
+                })
+          ]);
       });
-    })
   })
 };
