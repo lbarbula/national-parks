@@ -8,6 +8,13 @@ router.get('/', function(req, res, next) {
     res.render('index', { list:parks });
   })
 });
+
+router.get('/:id', function (req,res,next){
+  knex('park').where({id:req.params.id}).first().then(function(nature){
+    res.render('detail', {nature:nature})
+  })
+})
+
 router.get('/parks', function(req, res, next){
   knex('state').select().then(function(states){
     res.render('parks', {states: states})
