@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
     .then(function(){
     // Inserts seed entries
     return Promise.all([
-      knex('state').insert({id:1, name: 'Alaska'}),
+      knex('state').insert({name: 'Alaska'}),
       knex('state').insert({name: 'Arizona'}),
       knex('state').insert({name: 'Arkansas'}),
       knex('state').insert({name: 'California'}),
@@ -37,12 +37,20 @@ exports.seed = function(knex, Promise) {
     }).then(function(){
       return knex('park').del()
       .then(function(){
+        return knex('state').select().then(function(states){
       // Inserts seed entries
-      return Promise.all([
+          function getStateId(name) {
+            for(var i = 0;i < states.length;i++) {
+              if(name === states[i].name){
+                return states[i].id
+              }
+            }
+          }
+          return Promise.all([
         // Inserts seed entries
-          knex('park').insert({name: 'Yellowstone', year_founded: '1872', state_id:25, size:'2219790', img:'http://cdn.yellowstoneparknet.com/images/home/summer.jpg'}),
-        ]);
+              knex('park').insert({name: 'Yellowstone', year_founded: '1872', state_id:getStateId('Wyoming'), size:'2219790', img:'http://cdn.yellowstoneparknet.com/images/home/summer.jpg'}),
+            ]);
       });
     })
-
+  })
 };
