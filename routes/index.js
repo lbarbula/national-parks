@@ -8,5 +8,16 @@ router.get('/', function(req, res, next) {
     res.render('index', { list:parks });
   })
 });
-
+router.get('/parks', function(req, res, next){
+  knex('state').select().then(function(states){
+    res.render('parks', {states: states})
+  })
+})
+router.post('/parks', function(req, res, next){
+  knex('park').insert(req.body).then(function(){
+    res.redirect('/')
+  }).catch(function(error){
+    next(error)
+  })
+})
 module.exports = router;
