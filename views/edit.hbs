@@ -1,12 +1,12 @@
-<form action='/{{id}}/edit' method='post'>
+<form action='/{{park.id}}/edit' method='post'>
   <input type="text" name='name' placeholder="name" value="{{park.name}}">
-  <input type='number' name='year_founded' placeholder='Year Established'>
+  <input type='number' name='year_founded' placeholder='Year Established' value="{{park.year_founded}}">
   <select name="state_id">
     {{#each states}}
     <option value="{{this.id}}">{{this.name}}</option>
     {{/each}}
   </select>
-  <input type="number" name="size" placeholder="Size in Acres">
-  <input type="url" name="img" placeholder="Image URL">
-  <button type="submit">Create</button>
+  <input type="number" name="size" placeholder="Size in Acres" value="{{park.size}}">
+  <input type="url" name="img" placeholder="Image URL" value="{{park.img}}">
+  <button type="submit">Edit</button>
 </form>
